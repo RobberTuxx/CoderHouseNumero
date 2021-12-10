@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import Header from "./src/components/Header";
+import StartGame from "./src/screens/StartGame";
+import GameStart from "./src/screens/GameStart";
+import {useFonts} from "expo-font";
+import AppLoading from "expo-app-loading";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    const [loaded] = useFonts({
+        OpenSansBold: require('./assets/fonts/OpenSans-Bold.ttf'),
+        OpenSansRegular: require('./assets/fonts/OpenSans-Regular.ttf'),
+    });
+
+    if (!loaded) return <AppLoading/>
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <Header/>
+            <StartGame/>
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
 });
